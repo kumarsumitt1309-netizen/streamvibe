@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StreamVibe – Watch. Download. Connect.</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme" id="app-body">
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">▶</span>
+      <span class="brand-name">StreamVibe</span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link active">Home</a>
+      <a href="pages/plans.html" class="nav-link">Plans</a>
+    </div>
+    <div class="nav-auth" id="nav-auth">
+      <button class="btn btn-ghost" onclick="showAuth('login')">Log In</button>
+      <button class="btn btn-primary" onclick="showAuth('register')">Sign Up</button>
+    </div>
+    <!-- Shown after login -->
+    <div class="nav-user hidden" id="nav-user">
+      <span class="user-badge" id="user-plan-badge">FREE</span>
+      <a href="pages/profile.html" class="nav-avatar" id="nav-avatar">👤</a>
+      <button class="btn btn-ghost btn-sm" onclick="handleLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="hero-section">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Your Next Favourite Stream</p>
+      <h1 class="hero-title">Watch Anything.<br/>Anywhere. Anytime.</h1>
+      <p class="hero-sub">Stream videos, download for later, chat with friends via video calls — all in one place.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" onclick="showAuth('register')">Get Started Free</button>
+        <button class="btn btn-outline btn-lg" onclick="showAuth('login')">Log In</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="mock-player">
+        <div class="mock-screen">
+          <span class="mock-play">▶</span>
+        </div>
+        <div class="mock-bar">
+          <div class="mock-progress"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== AUTH MODAL ========== -->
+  <div class="modal-overlay hidden" id="auth-overlay" onclick="closeAuth(event)">
+    <div class="modal auth-modal" id="auth-modal">
+
+      <!-- Tab switcher -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Log In</button>
+        <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Sign Up</button>
+      </div>
+
+      <!-- ===== LOGIN FORM ===== -->
+      <div id="form-login">
+        <h2 class="auth-title">Welcome back</h2>
+        <p class="auth-sub">Log in to continue watching</p>
+
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="login-email" class="form-input" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••" />
+          <span class="password-toggle" onclick="togglePassword('login-password')">👁</span>
+        </div>
+
+        <div class="form-msg error hidden" id="login-error"></div>
+        <div class="form-msg info hidden" id="login-info"></div>
+
+        <button class="btn btn-primary btn-full" id="login-btn" onclick="handleLogin()">
+          Log In
+        </button>
+
+        <p class="auth-switch">Don't have an account? <span onclick="switchTab('register')">Sign Up</span></p>
+      </div>
+
+      <!-- ===== REGISTER FORM ===== -->
+      <div id="form-register" class="hidden">
+        <h2 class="auth-title">Create your account</h2>
+        <p class="auth-sub">Start streaming for free</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" id="reg-fname" class="form-input" placeholder="John" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" id="reg-lname" class="form-input" placeholder="Doe" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="reg-email" class="form-input" placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Mobile Number</label>
+          <div class="phone-input">
+            <span class="phone-code">+91</span>
+            <input type="tel" id="reg-phone" class="form-input" placeholder="9876543210" maxlength="10"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="reg-password" class="form-input" placeholder="Min. 8 characters" />
+          <span class="password-toggle" onclick="togglePassword('reg-password')">👁</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <input type="password" id="reg-confirm" class="form-input" placeholder="Re-enter password" />
+        </div>
+
+        <!-- Password strength bar -->
+        <div class="strength-bar">
+          <div class="strength-fill" id="strength-fill"></div>
+        </div>
+        <p class="strength-label" id="strength-label">Password strength</p>
+
+        <div class="form-msg error hidden" id="reg-error"></div>
+        <div class="form-msg success hidden" id="reg-success"></div>
+
+        <button class="btn btn-primary btn-full" onclick="handleRegister()">Create Account</button>
+        <p class="auth-switch">Already have an account? <span onclick="switchTab('login')">Log In</span></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== TOAST NOTIFICATION ========== -->
+  <div class="toast hidden" id="toast">
+    <span id="toast-msg"></span>
+  </div>
+
+  <!-- ========== FIREBASE SDK ========== -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <!-- ========== APP SCRIPTS ========== -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui-helpers.js"></script>
+
+</body>
+</html>
