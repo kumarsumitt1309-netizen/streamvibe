@@ -1,0 +1,277 @@
+/* ================================================
+   STREAMVIBE — auth.css
+   Covers: modal overlay, auth card, form inputs,
+           OTP boxes, password strength bar
+   ================================================ */
+
+/* ---------- MODAL OVERLAY ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- AUTH CARD ---------- */
+.auth-modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-md);
+  animation: slideUp 0.25s ease;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ---------- TABS ---------- */
+.auth-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.75rem;
+  background: var(--bg-hover);
+  border-radius: var(--radius-full);
+  padding: 4px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.auth-tab.active {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- AUTH TEXT ---------- */
+.auth-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+  color: var(--text-primary);
+}
+
+.auth-sub {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.auth-switch {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 1.25rem;
+}
+.auth-switch span {
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: 600;
+}
+.auth-switch span:hover { text-decoration: underline; }
+
+/* ---------- FORM ELEMENTS ---------- */
+.form-group {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-input::placeholder { color: var(--text-muted); }
+
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.form-input.error { border-color: var(--error); }
+.form-input.success { border-color: var(--success); }
+
+/* Password visibility toggle */
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.6;
+  transition: opacity var(--transition);
+}
+.password-toggle:hover { opacity: 1; }
+
+/* Phone input */
+.phone-input {
+  display: flex;
+  gap: 0;
+}
+.phone-code {
+  display: flex;
+  align-items: center;
+  padding: 0.65rem 0.8rem;
+  background: var(--bg-hover);
+  border: 1.5px solid var(--border);
+  border-right: none;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.phone-input .form-input {
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* ---------- MESSAGES ---------- */
+.form-msg {
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+.form-msg.error   { background: rgba(255,79,79,0.1);  color: var(--error);   border: 1px solid rgba(255,79,79,0.3);  }
+.form-msg.success { background: rgba(34,201,122,0.1); color: var(--success); border: 1px solid rgba(34,201,122,0.3); }
+.form-msg.info    { background: rgba(79,195,247,0.1); color: var(--info);    border: 1px solid rgba(79,195,247,0.3);  }
+
+/* ---------- PASSWORD STRENGTH ---------- */
+.strength-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  margin-bottom: 0.3rem;
+  overflow: hidden;
+}
+.strength-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-full);
+  transition: width 0.35s ease, background-color 0.35s ease;
+  background: var(--error);
+}
+.strength-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* ---------- OTP ---------- */
+.otp-section { margin-top: 0.5rem; }
+
+.otp-inputs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.otp-box {
+  width: 44px;
+  height: 52px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.otp-box:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.resend-otp {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+}
+.resend-otp span {
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ---------- LOADING STATE ---------- */
+.btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+.btn.loading::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-left: 0.5rem;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 480px) {
+  .auth-modal { padding: 1.5rem; }
+  .form-row   { grid-template-columns: 1fr; }
+  .otp-box    { width: 38px; height: 46px; font-size: 1.1rem; }
+}

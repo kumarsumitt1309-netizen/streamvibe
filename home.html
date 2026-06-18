@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home – StreamVibe</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/home.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme" id="app-body">
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">▶</span>
+      <span class="brand-name">StreamVibe</span>
+    </div>
+    <div class="nav-links">
+      <a href="home.html"     class="nav-link active">Home</a>
+      <a href="plans.html"    class="nav-link">Plans</a>
+      <a href="profile.html"  class="nav-link">Profile</a>
+      <a href="calls.html"    class="nav-link">Video Call</a>
+    </div>
+    <div class="nav-search">
+      <input type="text" id="search-input" class="search-box" placeholder="Search videos..." oninput="filterVideos(this.value)"/>
+    </div>
+    <div class="nav-user">
+      <span class="user-badge" id="user-plan-badge">FREE</span>
+      <span class="user-greeting" id="user-greeting">Hi 👋</span>
+      <a href="profile.html" class="nav-avatar">👤</a>
+      <button class="btn btn-ghost btn-sm" onclick="handleLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="home-main">
+
+    <!-- Watch limit banner (shown when approaching limit) -->
+    <div class="limit-banner hidden" id="limit-banner">
+      ⏱ You're on the <strong id="banner-plan">Free</strong> plan.
+      Video watching is limited to <strong id="banner-mins">5</strong> minutes.
+      <a href="plans.html" class="text-accent">Upgrade →</a>
+    </div>
+
+    <!-- Category filters -->
+    <div class="category-row">
+      <button class="cat-btn active" onclick="filterCategory('all', this)">All</button>
+      <button class="cat-btn" onclick="filterCategory('trending', this)">🔥 Trending</button>
+      <button class="cat-btn" onclick="filterCategory('music', this)">🎵 Music</button>
+      <button class="cat-btn" onclick="filterCategory('tech', this)">💻 Tech</button>
+      <button class="cat-btn" onclick="filterCategory('sports', this)">⚽ Sports</button>
+      <button class="cat-btn" onclick="filterCategory('comedy', this)">😂 Comedy</button>
+    </div>
+
+    <!-- Video grid -->
+    <div class="video-grid" id="video-grid">
+      <!-- Cards are injected by home.js -->
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state hidden" id="empty-state">
+      <p class="empty-icon">🎬</p>
+      <p class="empty-title">No videos found</p>
+      <p class="empty-sub">Try a different search or category</p>
+    </div>
+
+  </main>
+
+  <!-- TOAST -->
+  <div class="toast hidden" id="toast"><span id="toast-msg"></span></div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/ui-helpers.js"></script>
+  <script src="../js/home.js"></script>
+</body>
+</html>
