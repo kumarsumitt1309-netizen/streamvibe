@@ -21,7 +21,7 @@ const db   = firebase.firestore();
 
 // ---- IMPORTANT: Disable offline persistence ----
 // This fixes the "client is offline" error on localhost
-db.settings({ experimentalForceLongPolling: true, experimentautodetectlongpolling: false});
+db.settings({ experimentalForceLongPolling: true});
 db.disableNetwork().then(() => db.enableNetwork());
 
 // ---- Keep user logged in across browser refresh ----
